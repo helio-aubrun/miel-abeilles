@@ -1,6 +1,6 @@
 import random
 import openpyxl
-from bee import Bee
+from beehive import Bee
 
 NB_BEE = 100
 
@@ -28,6 +28,8 @@ FLOWERS = import_flowers ()
 def init_population () :
     for i in range (NB_BEE) :
         path = random.sample(FLOWERS, len(FLOWERS))
+        path.append((500,500))
+        path.insert (0, (500,500))
         POPULATION.append (Bee(path))
 
 
@@ -36,6 +38,10 @@ def selection (NB_TOP) :
     top = bee_classment [:NB_TOP]
 
     return top
+
+def multiplication_population (top):
+    for i in range(NB_BEE):
+        POPULATION[i] = top[i%len(top)]
 
 
 if "__main__" == __name__ :
