@@ -38,14 +38,18 @@ def init_population () :
 
 
 def selection (NB_TOP) :
-    bee_classment = sorted (POPULATION , key=lambda Bee: Bee.distance_traveled)
+    bee_classment = sorted (POPULATION , key=lambda Bee: Bee.get_distance_traveled())
     top = bee_classment [:NB_TOP]
-
     return top
 
 def multiplication_population (top):
     for i in range(NB_BEE):
         POPULATION[i] = top[i%len(top)]
+
+def print_bees():
+    i=0
+    for b in POPULATION:
+        print (f"Bee {i}  {b}")
 
 
 if "__main__" == __name__ :
@@ -55,6 +59,5 @@ if "__main__" == __name__ :
     for bee in POPULATION : 
         if random.random() > MUTATION_RATE:
             bee.mutation(MUTATION_FREQUENCY)
-    for affiche in POPULATION : 
-        print(affiche.distance_traveled)
+    print_bees()
         
