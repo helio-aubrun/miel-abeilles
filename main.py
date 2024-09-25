@@ -8,6 +8,10 @@ NB_TOP = 20
 
 POPULATION = []
 
+MUTATION_RATE = 0.2
+
+MUTATION_FREQUENCY = 2
+
 def import_flowers () :
     dataframe = openpyxl.load_workbook("Champ.xlsx")
 
@@ -47,5 +51,10 @@ def multiplication_population (top):
 if "__main__" == __name__ :
     init_population ()
     top = selection (NB_TOP)
-    for bee in top :
-        print (bee.distance_traveled)
+    multiplication_population(top)
+    for bee in POPULATION : 
+        if random.random() > MUTATION_RATE:
+            bee.mutation(MUTATION_FREQUENCY)
+    for affiche in POPULATION : 
+        print(affiche.distance_traveled)
+        

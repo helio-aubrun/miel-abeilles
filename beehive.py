@@ -1,4 +1,6 @@
 import math
+import random
+
 
 
 class Bee:
@@ -14,3 +16,11 @@ class Bee:
                 + (self.path[i][1] - self.path[i + 1][1]) ** 2
             )
         self.distance_traveled = distance_traveled
+
+    def mutation(self,mutation_frequency):
+        for i in range (mutation_frequency):
+            a = random.randint(1,len(self.path)-1)
+            b = random.randint(1,len(self.path)-1)
+            tmp = self.path[b]
+            self.path[b]= self.path[a]
+            self.path[a] = tmp
