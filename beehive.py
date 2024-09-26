@@ -38,9 +38,11 @@ class Bee:
 class Beehive:
 
     def __init__(self, nb_bees, flowers):
-        self.nb_bees = nb_bees
-        self.flowers = flowers
+        self._nb_bees = nb_bees
+        self._flowers = flowers
+        self._generation = 0
         self.first_generation()
+        
 
     def selection (self, nb_top) :
         bee_classment = sorted (self.population , key=lambda Bee: Bee.get_distance_traveled())
@@ -50,11 +52,16 @@ class Beehive:
     def multiplication_population (self, top, nb_bee):
         for i in range(nb_bee):
             self.population[i] = top[i%len(top)]
+        self._generation += 1
 
     def first_generation (self) :
         self.population = []
-        for i in range (self.nb_bees) :
-            path = random.sample(self.flowers, len(self.flowers))
+        for i in range (self._nb_bees) :
+            path = random.sample(self._flowers, len(self._flowers))
             path.append((500,500))
             path.insert (0, (500,500))
             self.population.append (Bee(path))
+        self._generation += 1
+
+    def __str__(self):
+        return f"nomber of bees : {self._nb_bees} generation :  {self._generation}"

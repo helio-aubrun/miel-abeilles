@@ -35,6 +35,9 @@ def print_bees():
     for b in BEES.population:
         print (f"Bee {i}  {b}")
 
+def print_beehive():
+    print (BEES)
+
 
 if "__main__" == __name__ :
     top = BEES.selection(NB_TOP)
@@ -43,4 +46,4 @@ if "__main__" == __name__ :
         if random.random() > MUTATION_RATE:
             bee.mutation(MUTATION_FREQUENCY)
     print_bees()
-        
+    print_beehive()
