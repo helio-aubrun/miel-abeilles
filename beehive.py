@@ -2,12 +2,14 @@ import math
 import random
 
 
-class Bee:
-    def __init__(self, path):
-        self._path = path
-        self._compute_distance_traveled()
 
-    def _compute_distance_traveled(self) -> None:
+class Bee:
+    def __init__(self, path, id):
+        self.id = id
+        self._path = path
+        self.compute_distance_traveled()
+
+    def compute_distance_traveled(self) -> None:
         distance_traveled = 0
         for i in range(len(self._path) - 1):
             distance_traveled += math.sqrt(
@@ -22,6 +24,8 @@ class Bee:
             b = random.randint(1, len(self._path) - 1)
             self._path[a], self._path[b] = self._path[b], self._path[a]
 
+        self.compute_distance_traveled()
+
     def get_path(self):
         return self._path
 
@@ -29,7 +33,7 @@ class Bee:
         return self._distance_traveled
 
     def __str__(self):
-        return f"path :  distance traveled :  {self._distance_traveled}"#{self._path}
+        return f"id : {self.id} distance traveled :  {self._distance_traveled}"#{self._path}
 
 
 class Beehive:
@@ -46,9 +50,9 @@ class Beehive:
         top = bee_classment[:selection_rate]
         return top
 
-    def multiplication_population(self, top, nb_bees):
-        for i in range(nb_bees):
-            self.population[i] = top[random.randint (0, len (top) - 1)]
+    def multiplication_population(self, top):
+        for i in range(self._nb_bees):
+            self.population[i] = top[i % len(top)]
         self.caclulate_av_distance()
         self._generation += 1
 
@@ -58,13 +62,21 @@ class Beehive:
             path = random.sample(self._flowers, len(self._flowers))
             path.append((500, 500))
             path.insert(0, (500, 500))
-            self.population.append(Bee(path))
+            self.population.append(Bee(path, i))
         self._generation = 1
 
     def print_top_bees(self,nb):
-        top = self.select(nb)
-        for i in range (len(top)):
-            print(f"Bee {i}  {top[i].get_distance_traveled()}")
+        top = self.select(self._nb_bees)
+        distances_vues = set()
+        i=0
+        while len(distances_vues) < nb and i < self._nb_bees:
+            distance = top[i].get_distance_traveled()
+
+            if distance not in distances_vues:
+                print(f"Bee {i}: {distance}")
+                distances_vues.add(distance)
+            i += 1
+            
 
 
     def caclulate_av_distance(self):

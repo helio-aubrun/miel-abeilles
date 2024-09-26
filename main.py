@@ -13,16 +13,16 @@ def print_beehive():
 
 def mutate_beehive():
     for bee in BEEHIVE.population:
-        if random.random() > MUTATION_RATE:
+        if random.random() < MUTATION_RATE:
             bee.mutation(MUTATION_FREQUENCY)
 
 
 if "__main__" == __name__:
     print_beehive()
-    for i in range(3):
+    for i in range(6):
         top = BEEHIVE.select(SELECTION_RATE)
-        BEEHIVE.multiplication_population(top, NB_BEES)
+        BEEHIVE.multiplication_population(top)
         mutate_beehive()
         print_beehive()
-        BEEHIVE.print_top_bees(2)
+        BEEHIVE.print_top_bees(10)
 
