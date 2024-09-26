@@ -2,7 +2,6 @@ import math
 import random
 
 
-
 class Bee:
     def __init__(self, path):
         self._path = path
@@ -17,20 +16,20 @@ class Bee:
             )
         self._distance_traveled = distance_traveled
 
-    def mutation(self,mutation_frequency):
-        for i in range (mutation_frequency):
-            a = random.randint(1,len(self._path)-1)
-            b = random.randint(1,len(self._path)-1)
+    def mutation(self, mutation_frequency):
+        for i in range(mutation_frequency):
+            a = random.randint(1, len(self._path) - 1)
+            b = random.randint(1, len(self._path) - 1)
             tmp = self._path[b]
-            self._path[b]= self._path[a]
+            self._path[b] = self._path[a]
             self._path[a] = tmp
 
     def get_path(self):
         return self._path
-    
+
     def get_distance_traveled(self):
         return self._distance_traveled
-    
+
     def __str__(self):
         return f"path : {self._path} distance traveled :  {self._distance_traveled}"
 
@@ -42,26 +41,27 @@ class Beehive:
         self._flowers = flowers
         self._generation = 0
         self.first_generation()
-        
 
-    def selection (self, selection_rate) :
-        bee_classment = sorted (self.population , key=lambda Bee: Bee.get_distance_traveled())
-        top = bee_classment [:selection_rate]
+    def selection(self, selection_rate):
+        bee_classment = sorted(
+            self.population, key=lambda Bee: Bee.get_distance_traveled()
+        )
+        top = bee_classment[:selection_rate]
         return top
-    
-    def multiplication_population (self, top, nb_bee):
+
+    def multiplication_population(self, top, nb_bee):
         for i in range(nb_bee):
-            self.population[i] = top[i%len(top)]
+            self.population[i] = top[i % len(top)]
         self._generation += 1
 
-    def first_generation (self) :
+    def first_generation(self):
         self.population = []
-        for i in range (self._nb_bees) :
+        for i in range(self._nb_bees):
             path = random.sample(self._flowers, len(self._flowers))
-            path.append((500,500))
-            path.insert (0, (500,500))
-            self.population.append (Bee(path))
+            path.append((500, 500))
+            path.insert(0, (500, 500))
+            self.population.append(Bee(path))
         self._generation += 1
 
     def __str__(self):
-        return f"nomber of bees : {self._nb_bees} generation :  {self._generation}"
+        return f"number of bees : {self._nb_bees} generation :  {self._generation}"
