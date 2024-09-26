@@ -20,9 +20,7 @@ class Bee:
         for i in range(mutation_frequency):
             a = random.randint(1, len(self._path) - 1)
             b = random.randint(1, len(self._path) - 1)
-            tmp = self._path[b]
-            self._path[b] = self._path[a]
-            self._path[a] = tmp
+            self._path[a], self._path[b] = self._path[b], self._path[a]
 
     def get_path(self):
         return self._path
@@ -31,27 +29,27 @@ class Bee:
         return self._distance_traveled
 
     def __str__(self):
-        return f"path : {self._path} distance traveled :  {self._distance_traveled}"
+        return f"path :  distance traveled :  {self._distance_traveled}"#{self._path}
 
 
 class Beehive:
-
     def __init__(self, nb_bees, flowers):
         self._nb_bees = nb_bees
         self._flowers = flowers
-        self._generation = 0
         self.first_generation()
+        self.caclulate_av_distance()
 
-    def selection(self, selection_rate):
+    def select(self, selection_rate):
         bee_classment = sorted(
             self.population, key=lambda Bee: Bee.get_distance_traveled()
         )
         top = bee_classment[:selection_rate]
         return top
 
-    def multiplication_population(self, top, nb_bee):
-        for i in range(nb_bee):
-            self.population[i] = top[i % len(top)]
+    def multiplication_population(self, top, nb_bees):
+        for i in range(nb_bees):
+            self.population[i] = top[random.randint (0, len (top) - 1)]
+        self.caclulate_av_distance()
         self._generation += 1
 
     def first_generation(self):
@@ -61,7 +59,22 @@ class Beehive:
             path.append((500, 500))
             path.insert(0, (500, 500))
             self.population.append(Bee(path))
-        self._generation += 1
+        self._generation = 1
+
+    def print_top_bees(self,nb):
+        top = self.select(nb)
+        for i in range (len(top)):
+            print(f"Bee {i}  {top[i].get_distance_traveled()}")
+
+
+    def caclulate_av_distance(self):
+        self.av = 0
+        for i in range (self._nb_bees):
+            self.av += self.population[i].get_distance_traveled()
+        self.av = self.av / self._nb_bees
+
+    def get_av(self):
+        return self.av
 
     def __str__(self):
-        return f"number of bees : {self._nb_bees} generation :  {self._generation}"
+        return f"generation :  {self._generation} | average distance : {self.av}"
