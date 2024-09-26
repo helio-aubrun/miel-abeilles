@@ -38,12 +38,16 @@ def print_bees():
 def print_beehive():
     print (BEEHIVE)
 
-
-if "__main__" == __name__ :
-    top = BEEHIVE.selection(SELECTION_RATE)
-    BEEHIVE.multiplication_population(top, NB_BEE)
+def mutate_beehive():
     for bee in BEEHIVE.population : 
         if random.random() > MUTATION_RATE:
             bee.mutation(MUTATION_FREQUENCY)
+
+
+if "__main__" == __name__ :
+    print_beehive()
+    top = BEEHIVE.selection(SELECTION_RATE)
+    BEEHIVE.multiplication_population(top, NB_BEE)
+    mutate_beehive()
     print_bees()
     print_beehive()
