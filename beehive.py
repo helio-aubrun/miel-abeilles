@@ -44,9 +44,9 @@ class Beehive:
         self.first_generation()
         
 
-    def selection (self, nb_top) :
+    def selection (self, selection_rate) :
         bee_classment = sorted (self.population , key=lambda Bee: Bee.get_distance_traveled())
-        top = bee_classment [:nb_top]
+        top = bee_classment [:selection_rate]
         return top
     
     def multiplication_population (self, top, nb_bee):

@@ -2,13 +2,13 @@ import random
 import openpyxl
 from beehive import Bee, Beehive
 
-NB_BEE = 100
+NB_BEE = 100 # number of bees in the beehive
 
-NB_TOP = 20
+SELECTION_RATE = 20 # How many bees we keep per generation
 
-MUTATION_RATE = 0.2
+MUTATION_RATE = 0.2 # How many bees will mutate
 
-MUTATION_FREQUENCY = 2
+MUTATION_FREQUENCY = 2 # How many flower will change in a bee mutate path
 
 def import_flowers () :
     dataframe = openpyxl.load_workbook("Champ.xlsx")
@@ -25,24 +25,24 @@ def import_flowers () :
 
     return list_flowers
 
-FLOWERS = import_flowers ()
+FLOWERS = import_flowers () # List of tuple that containt flowers' positions
 
-BEES = Beehive(NB_BEE, FLOWERS)
+BEEHIVE = Beehive(NB_BEE, FLOWERS) # Beehive
 
 
 def print_bees():
     i=0
-    for b in BEES.population:
+    for b in BEEHIVE.population:
         print (f"Bee {i}  {b}")
 
 def print_beehive():
-    print (BEES)
+    print (BEEHIVE)
 
 
 if "__main__" == __name__ :
-    top = BEES.selection(NB_TOP)
-    BEES.multiplication_population(top, NB_BEE)
-    for bee in BEES.population : 
+    top = BEEHIVE.selection(SELECTION_RATE)
+    BEEHIVE.multiplication_population(top, NB_BEE)
+    for bee in BEEHIVE.population : 
         if random.random() > MUTATION_RATE:
             bee.mutation(MUTATION_FREQUENCY)
     print_bees()
