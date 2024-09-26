@@ -1,5 +1,7 @@
 import random
-from config import BEEHIVE, MUTATION_RATE, MUTATION_FREQUENCY, SELECTION_RATE, NB_BEES
+from beehive import Beehive
+
+BEEHIVE = Beehive()  # Beehive
 
 
 def print_bees():
@@ -11,18 +13,11 @@ def print_beehive():
     print(BEEHIVE)
 
 
-def mutate_beehive():
-    for bee in BEEHIVE.population:
-        if random.random() < MUTATION_RATE:
-            bee.mutation(MUTATION_FREQUENCY)
-
-
 if "__main__" == __name__:
     print_beehive()
     for i in range(6):
-        top = BEEHIVE.select(SELECTION_RATE)
+        top = BEEHIVE.select()
         BEEHIVE.multiplication_population(top)
-        mutate_beehive()
+        BEEHIVE.mutate_beehive()
         print_beehive()
         BEEHIVE.print_top_bees(10)
-

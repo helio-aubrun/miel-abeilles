@@ -1,6 +1,6 @@
 import math
 import random
-
+from config import MUTATION_FREQUENCY, MUTATION_RATE, NB_BEES, FLOWERS, SELECTION_RATE
 
 
 class Bee:
@@ -33,17 +33,17 @@ class Bee:
         return self._distance_traveled
 
     def __str__(self):
-        return f"id : {self.id} distance traveled :  {self._distance_traveled}"#{self._path}
+        return f"id : {self.id} distance traveled :  {self._distance_traveled}"  # {self._path}
 
 
 class Beehive:
-    def __init__(self, nb_bees, flowers):
-        self._nb_bees = nb_bees
-        self._flowers = flowers
+    def __init__(self):
+        self._nb_bees = NB_BEES
+        self._flowers = FLOWERS
         self.first_generation()
         self.caclulate_av_distance()
 
-    def select(self, selection_rate):
+    def select(self, selection_rate=SELECTION_RATE):
         bee_classment = sorted(
             self.population, key=lambda Bee: Bee.get_distance_traveled()
         )
@@ -65,10 +65,10 @@ class Beehive:
             self.population.append(Bee(path, i))
         self._generation = 1
 
-    def print_top_bees(self,nb):
+    def print_top_bees(self, nb):
         top = self.select(self._nb_bees)
         distances_vues = set()
-        i=0
+        i = 0
         while len(distances_vues) < nb and i < self._nb_bees:
             distance = top[i].get_distance_traveled()
 
@@ -76,12 +76,15 @@ class Beehive:
                 print(f"Bee {i}: {distance}")
                 distances_vues.add(distance)
             i += 1
-            
 
+    def mutate_beehive(self):
+        for bee in self.population:
+            if random.random() < MUTATION_RATE:
+                bee.mutation(MUTATION_FREQUENCY)
 
     def caclulate_av_distance(self):
         self.av = 0
-        for i in range (self._nb_bees):
+        for i in range(self._nb_bees):
             self.av += self.population[i].get_distance_traveled()
         self.av = self.av / self._nb_bees
 
