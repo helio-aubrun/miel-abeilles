@@ -1,4 +1,3 @@
-import random
 from beehive import Beehive
 
 BEEHIVE = Beehive()  # Beehive
