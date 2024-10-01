@@ -8,7 +8,7 @@ def plot_in_terminal(values: list) -> None:
     import plotext as plt
 
     plt.plot([i for i in range(len(values))], values)
-    plt.title("Évolution de la perf moyenne des abeilles")
+    plt.title("Evolution of average distance of bees per generation")
     plt.show()
 
 
