@@ -1,22 +1,37 @@
 from beehive import Beehive
 
-BEEHIVE = Beehive()  # Beehive
-
-
-def print_bees():
+def print_bees(beehive):
     for i in range(3):
-        print(f"Bee {i}  {BEEHIVE.population[i]}")
+        print(f"Bee {beehive.population.id[i]}  {beehive.population[i]}")
 
+def plot_in_terminal(values: list) -> None:
+    import plotext as plt
 
-def print_beehive():
-    print(BEEHIVE)
+    plt.plot([i for i in range(len(values))], values)
+    plt.title("Évolution de la perf moyenne des abeilles")
+    plt.show()
 
 
 if "__main__" == __name__:
-    print_beehive()
-    for i in range(6):
-        top = BEEHIVE.select()
-        BEEHIVE.multiplication_population(top)
-        BEEHIVE.mutate_beehive()
-        print_beehive()
-        BEEHIVE.print_top_bees(10)
+    values = []
+    beehive = Beehive()
+
+    values.append (beehive.get_av())
+
+    print (beehive)
+    beehive.print_top_bees (10)
+
+    for i in range(100):
+
+        top_bees = beehive.select_top_bees ()
+        beehive.multiply (top_bees)
+        beehive.mutate_beehive ()
+
+        print (f"beehive {beehive}")
+        beehive.print_top_bees (10)
+
+        values.append (beehive.get_av())
+
+    plot_in_terminal (values)
+
+
