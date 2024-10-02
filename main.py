@@ -1,4 +1,6 @@
+from config import NUMBER_OF_GENERATION
 from beehive import Beehive
+
 
 def print_bees(beehive):
     for i in range(3):
@@ -21,7 +23,7 @@ if "__main__" == __name__:
     print (beehive)
     beehive.print_top_bees (10)
 
-    for i in range(100):
+    for i in range(NUMBER_OF_GENERATION):
 
         top_bees = beehive.select_top_bees ()
         beehive.multiply (top_bees)

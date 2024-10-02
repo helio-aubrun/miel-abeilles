@@ -27,10 +27,8 @@ class Beehive:
         self.population = []
         for i in range(self._nb_bees):
             path = random.sample(self._flowers, len(self._flowers))
-            path.append((500, 500))
-            path.insert(0, (500, 500))
             self.population.append(Bee(path, i))
-        self._generation = 1
+        self._generation = 0
 
     def print_top_bees(self, nb):
         top = self.select_top_bees(self._nb_bees)
