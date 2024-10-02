@@ -35,14 +35,6 @@ class Bee:
 
         return distance_traveled
 
-    # def mutate(self, mutate_frequency):
-    #     for i in range(mutate_frequency):
-    #         a = random.randint(1, len(self._path) - 2)
-    #         b = random.randint(1, len(self._path) - 2)
-    #         self._path[a], self._path[b] = self._path[b], self._path[a]
-
-    #     self.compute_distance()
-
     def mutate(self, mutate_frequency):
         test_beter_distance = False
         while not test_beter_distance :
