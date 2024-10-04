@@ -55,7 +55,7 @@ class Bee:
 
             if self.compute_distance(tmp_path) - self._distance_traveled <= MUTATION_MARGIN:
                 test_beter_distance = True
-        
+
         self._path = list (tmp_path)
 
     def cross_bee(self, other):
@@ -65,9 +65,9 @@ class Bee:
         for i in range (len(path_parent_2)):
             if path_parent_2[i] not in path_children:
                 print (path_parent_2[i])
-                path_children.extend(path_parent_2[i])
+                path_children.append(path_parent_2[i])
         return path_children
-    
+
     def change_path(self, new_path):
         self._path = list(new_path)
 

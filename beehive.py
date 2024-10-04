@@ -62,7 +62,7 @@ class Beehive:
                 path_children = top[i].cross_bee(top[0])
             else :
                 path_children = top[i].cross_bee(top[i+1])
-                self.population[i + SELECTION_RATE].change_path(path_children)
+            self.population[i + SELECTION_RATE].change_path(path_children)
 
     def get_av(self):
         return self.av

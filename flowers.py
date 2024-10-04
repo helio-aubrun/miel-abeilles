@@ -1,6 +1,8 @@
-import openpyxl
+
 
 def import_flowers_xlsx () :
+    import openpyxl
+
     dataframe = openpyxl.load_workbook("Champ.xlsx")
 
     dataframe1 = dataframe.active
