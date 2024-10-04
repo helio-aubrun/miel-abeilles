@@ -55,6 +55,7 @@ class Bee:
                 test_beter_distance = True
 
         self._path = list(tmp_path)
+        self._distance_traveled = self.compute_distance(self._path)
 
     def cross_bee(self, other):
         path_parent_1 = self._path
@@ -70,6 +71,7 @@ class Bee:
 
     def change_path(self, new_path):
         self._path = list(new_path)
+        self._distance_traveled = self.compute_distance(self._path)
 
     def get_id(self):
         return self.id
