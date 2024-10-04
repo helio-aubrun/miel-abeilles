@@ -59,13 +59,14 @@ class Bee:
         self._path = list (tmp_path)
 
     def cross_bee(self, other):
+        path_parent_1 = self._path
         path_parent_2 = other.get_path()
         path_children = []
-        path_children.extend(self._path[:20])
-        for i in range (len(path_parent_2)):
-            if path_parent_2[i] not in path_children:
-                print (path_parent_2[i])
-                path_children.append(path_parent_2[i])
+        path_children.extend(path_parent_1[:20])
+        for flower in path_parent_2:
+            if flower not in path_children:
+                #print (flower)
+                path_children.append(flower)
         return path_children
 
     def change_path(self, new_path):

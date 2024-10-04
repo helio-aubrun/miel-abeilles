@@ -55,14 +55,15 @@ class Beehive:
             self.av += self.population[i].get_distance()
         self.av = self.av / self._nb_bees
 
-    def cross_bees(self):
-        top = self.select_top_bees()
+    def cross_bees(self, top):
         for i in range (len(top)):
             if i +1 == len(top):
                 path_children = top[i].cross_bee(top[0])
             else :
                 path_children = top[i].cross_bee(top[i+1])
             self.population[i + SELECTION_RATE].change_path(path_children)
+        self.caclulate_av_distance()
+        self._generation += 1
 
     def get_av(self):
         return self.av
