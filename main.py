@@ -6,6 +6,7 @@ def print_bees(beehive):
     for i in range(3):
         print(f"Bee {beehive.population.id[i]}  {beehive.population[i]}")
 
+
 def plot_in_terminal(values: list) -> None:
     import plotext as plt
 
@@ -19,14 +20,14 @@ if "__main__" == __name__:
     beehive = Beehive()
     average_last_gen = int(beehive.get_av())
 
-    values.append (beehive.get_av())
+    values.append(beehive.get_av())
 
-    print (beehive)
-    beehive.print_top_bees (10)
+    print(beehive)
+    beehive.print_top_bees(10)
 
     for i in range(10):
 
-        top_bees = beehive.select_top_bees ()
+        top_bees = beehive.select_top_bees()
         # beehive.multiply (top_bees)
         beehive.cross_bees(top_bees)
         average_actual_gen = int(beehive.get_av())
@@ -35,11 +36,9 @@ if "__main__" == __name__:
         #     #print (average_last_gen)
         #     average_last_gen = int(beehive.get_av())
 
+        print(f"beehive {beehive}")
+        beehive.print_top_bees(10)
 
-        print (f"beehive {beehive}")
-        beehive.print_top_bees (10)
+        values.append(beehive.get_av())
 
-        values.append (beehive.get_av())
-
-
-    plot_in_terminal (values)
+    plot_in_terminal(values)

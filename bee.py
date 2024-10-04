@@ -1,36 +1,31 @@
 import random
 from config import MUTATION_MARGIN
 
+
 class Bee:
     def __init__(self, path, id):
         self.id = id
         self._path = path
         self._distance_traveled = self.compute_distance(self._path)
 
-    def distance_formula (self, i, path) :
-        distance = (
-                abs(path[i][0] - path[i + 1][0])
-                + abs(path[i][1] - path[i + 1][1])
-            )
-        
+    def distance_formula(self, i, path):
+        distance = abs(path[i][0] - path[i + 1][0]) + abs(path[i][1] - path[i + 1][1])
+
         return distance
 
-    def distance_formula_hive (self, i, path) :
-        distance = (
-                abs(path[i][0] - 500)
-                + abs(path[i][1] - 500)
-            )
-        
+    def distance_formula_hive(self, i, path):
+        distance = abs(path[i][0] - 500) + abs(path[i][1] - 500)
+
         return distance
 
-    def compute_distance(self,path):
-        distance_traveled = 0 
+    def compute_distance(self, path):
+        distance_traveled = 0
         for i in range(len(path) - 1):
-            distance_traveled += self.distance_formula (i, path)
+            distance_traveled += self.distance_formula(i, path)
 
-        distance_traveled += self.distance_formula_hive (0, path)
+        distance_traveled += self.distance_formula_hive(0, path)
 
-        distance_traveled += self.distance_formula_hive (-1, path)
+        distance_traveled += self.distance_formula_hive(-1, path)
 
         return distance_traveled
 
@@ -44,19 +39,22 @@ class Bee:
 
     def mutate(self, mutate_frequency):
         test_beter_distance = False
-        while not test_beter_distance :
-            
-            tmp_path = list (self._path)
+        while not test_beter_distance:
+
+            tmp_path = list(self._path)
 
             for i in range(mutate_frequency):
                 a = random.randint(0, len(tmp_path) - 1)
                 b = random.randint(0, len(tmp_path) - 1)
                 tmp_path[a], tmp_path[b] = tmp_path[b], tmp_path[a]
 
-            if self.compute_distance(tmp_path) - self._distance_traveled <= MUTATION_MARGIN:
+            if (
+                self.compute_distance(tmp_path) - self._distance_traveled
+                <= MUTATION_MARGIN
+            ):
                 test_beter_distance = True
 
-        self._path = list (tmp_path)
+        self._path = list(tmp_path)
 
     def cross_bee(self, other):
         path_parent_1 = self._path
@@ -65,16 +63,17 @@ class Bee:
         path_children.extend(path_parent_1[:20])
         for flower in path_parent_2:
             if flower not in path_children:
-                #print (flower)
+                # print (flower)
                 path_children.append(flower)
+        print(path_children)
         return path_children
 
     def change_path(self, new_path):
         self._path = list(new_path)
 
-    def get_id (self) :
+    def get_id(self):
         return self.id
-    
+
     def get_path(self):
         return self._path
 
@@ -85,7 +84,7 @@ class Bee:
         return f"id : {self.id} distance traveled :  {self._distance_traveled}"
 
 
-if __name__ == "__main__" :
+if __name__ == "__main__":
     # Example path of coordinates
     path = [(0, 0), (1, 1), (2, 2), (3, 3), (4, 4)]
 
