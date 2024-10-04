@@ -29,14 +29,6 @@ class Bee:
 
         return distance_traveled
 
-    # def mutate(self, mutate_frequency):
-    #     for i in range(mutate_frequency):
-    #         a = random.randint(1, len(self._path) - 2)
-    #         b = random.randint(1, len(self._path) - 2)
-    #         self._path[a], self._path[b] = self._path[b], self._path[a]
-
-    #     self.compute_distance()
-
     def mutate(self, mutate_frequency):
         test_beter_distance = False
         while not test_beter_distance:
@@ -64,9 +56,7 @@ class Bee:
         path_children.extend(path_parent_1[:20])
         for flower in path_parent_2:
             if flower not in path_children:
-                # print (flower)
                 path_children.append(flower)
-        print(path_children)
         return path_children
 
     def change_path(self, new_path):
