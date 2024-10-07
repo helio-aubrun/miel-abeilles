@@ -1,5 +1,5 @@
 from beehive import Beehive
-from config import AVERAGE_COMPARAISON
+from config import AVERAGE_COMPARAISON, NB_GENERATIONS_MUTATE
 
 
 def print_bees(beehive):
@@ -51,7 +51,7 @@ if "__main__" == __name__:
         print(f"beehive {beehive}")
         beehive.print_top_bees(10)
         values.append(beehive.get_av())
-    for i in range(100):
+    for i in range(NB_GENERATIONS_MUTATE):
         print ('mutate')
         beehive.mutate_beehive()
         print(f"beehive {beehive}")

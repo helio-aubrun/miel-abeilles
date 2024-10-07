@@ -47,6 +47,7 @@ class Beehive:
             if random.random() < MUTATION_RATE:
                 bee.mutate(MUTATION_FREQUENCY)
         self._generation += 1
+        self.compute_av_distance()
 
     def compute_av_distance(self):
         self.av = 0

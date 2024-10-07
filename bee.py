@@ -40,11 +40,11 @@ class Bee:
                 b = random.randint(0, len(tmp_path) - 1)
                 tmp_path[a], tmp_path[b] = tmp_path[b], tmp_path[a]
 
-            # if (
-            #     self.compute_distance(tmp_path) - self._distance_traveled
-            #     <= MUTATION_MARGIN
-            # ):
-            test_beter_distance = True
+            if (
+                 self.compute_distance(tmp_path) - self._distance_traveled
+                 <= MUTATION_MARGIN
+            ):
+                test_beter_distance = True
 
         self._path = list(tmp_path)
         self._distance_traveled = self.compute_distance(self._path)
