@@ -1,5 +1,5 @@
 import random
-from config import MUTATION_MARGIN
+from config import MUTATION_MARGIN, CROSS_QUOTA
 
 
 class Bee:
@@ -52,8 +52,7 @@ class Bee:
     def cross_bee(self, other):
         path_parent_1 = self._path
         path_parent_2 = other.get_path()
-        path_children = []
-        path_children.extend(path_parent_1[:20])
+        path_children = path_parent_1[:CROSS_QUOTA]
         for flower in path_parent_2:
             if flower not in path_children:
                 path_children.append(flower)
