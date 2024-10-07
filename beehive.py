@@ -46,6 +46,7 @@ class Beehive:
 
             if random.random() < MUTATION_RATE:
                 bee.mutate(MUTATION_FREQUENCY)
+        self._generation += 1
 
     def compute_av_distance(self):
         self.av = 0
@@ -68,7 +69,7 @@ class Beehive:
 
     def cross_bees(self, top):
         self.population = []
-        
+
         for i in range (NB_BEES) :
             parent1 = random.choice(top)
             parent2 = random.choice(top)

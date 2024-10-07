@@ -26,7 +26,7 @@ def not_convergence (values) :
         try :
             values_last_gens = list(values[-AVERAGE_COMPARAISON*2:][:AVERAGE_COMPARAISON])
             values_actual_gens = list(values[-AVERAGE_COMPARAISON:])
-            return not (0 <=compute_average_values(values_last_gens) - compute_average_values(values_actual_gens) <= 20)
+            return not (0 <=compute_average_values(values_last_gens) - compute_average_values(values_actual_gens) <= 50)
         except :
             return True
     else:
@@ -46,7 +46,14 @@ if "__main__" == __name__:
     while not_convergence(values):
         top_bees = beehive.select_top_bees()
         beehive.cross_bees(top_bees)
-        beehive.mutate_beehive ()
+        print("cross")
+        #beehive.mutate_beehive ()
+        print(f"beehive {beehive}")
+        beehive.print_top_bees(10)
+        values.append(beehive.get_av())
+    for i in range(100):
+        print ('mutate')
+        beehive.mutate_beehive()
         print(f"beehive {beehive}")
         beehive.print_top_bees(10)
         values.append(beehive.get_av())
