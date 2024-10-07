@@ -16,6 +16,6 @@ NUMBER_OF_GENERATION = 100  # How many generation the programme compute
 
 CROSS_QUOTA = 20 # The part that we keep from the first parent during the crossover
 
-AVERAGE_COMPARAISON = 10
+AVERAGE_COMPARAISON = 50
 
 NB_GENERATIONS_MUTATE = 500
