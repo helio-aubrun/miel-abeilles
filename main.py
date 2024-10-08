@@ -46,15 +46,15 @@ if "__main__" == __name__:
     while not_convergence(values):
         top_bees = beehive.select_top_bees()
         beehive.cross_bees(top_bees)
-        #beehive.mutate_beehive ()
+        beehive.mutate_beehive ()
         print(f"beehive {beehive}")
         beehive.print_top_bees(10)
         values.append(beehive.get_av())
-    for i in range(NB_GENERATIONS_MUTATE):
-        beehive.mutate_beehive()
-        print(f"beehive {beehive}")
-        beehive.print_top_bees(10)
-        values.append(beehive.get_av())
+    # for i in range(NB_GENERATIONS_MUTATE):
+    #     beehive.mutate_beehive()
+    #     print(f"beehive {beehive}")
+    #     beehive.print_top_bees(10)
+    #     values.append(beehive.get_av())
     # for i in range (50):
     #     beehive.mutate_beehive ()
     #     print(f"beehive {beehive}")
