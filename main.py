@@ -1,6 +1,6 @@
-from beehive import Beehive
-from config import AVERAGE_COMPARAISON, NB_GENERATIONS_MUTATE, NUMBER_OF_GENERATION
-from graphic import (
+from python_files.beehive import Beehive
+from python_files.config import AVERAGE_COMPARAISON, NB_GENERATIONS_MUTATE, NUMBER_OF_GENERATION
+from python_files.graphic import (
     plot_curve,
     drow_path_bee_matplotlib,
     drow_path_bee_turtle,

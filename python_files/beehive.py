@@ -1,5 +1,5 @@
 import random
-from config import (
+from python_files.config import (
     MUTATION_FREQUENCY,
     MUTATION_RATE,
     NB_BEES,
@@ -9,7 +9,7 @@ from config import (
     PARENT_RATE,
     NB_PARENT_KEPT,
 )
-from bee import Bee
+from python_files.bee import Bee
 
 
 class Beehive:

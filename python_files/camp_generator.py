@@ -1,7 +1,7 @@
 def generat_and_save_flower(nb_flower, name="camp"):
     from random import randint
 
-    with open(str(name) + "_" + str(nb_flower) + ".txt", "w") as file:
+    with open("python_files/" + str(name) + "_" + str(nb_flower) + ".txt", "w") as file:
         for i in range(nb_flower):
             file.write(str(randint(0, 1000)) + "," + str(randint(0, 1000)) + "\n")
 

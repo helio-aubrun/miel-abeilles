@@ -1,5 +1,5 @@
 import random
-from config import MUTATION_MARGIN, CROSS_QUOTA
+from python_files.config import MUTATION_MARGIN, CROSS_QUOTA
 
 
 class Bee:
