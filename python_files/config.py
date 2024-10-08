@@ -1,6 +1,6 @@
 NB_BEES = 100  # number of bees in the beehive
 
-SELECTION_RATE = 20  # How many bees we keep per generation
+SELECTION_QUOTA = 20  # How many bees we keep per generation
 
 MUTATION_RATE = 0.4  # How many bees will mutate
 
@@ -26,4 +26,4 @@ NB_SEGMENT = 5  # the number of segement from each parent
 
 PARENT_RATE = 0.5  # the chance that the segments will start with the first parent
 
-NB_PARENT_KEPT = SELECTION_RATE
+NB_PARENT_KEPT = SELECTION_QUOTA

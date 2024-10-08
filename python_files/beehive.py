@@ -4,7 +4,7 @@ from python_files.config import (
     MUTATION_RATE,
     NB_BEES,
     FLOWERS,
-    SELECTION_RATE,
+    SELECTION_QUOTA,
     NB_SEGMENT,
     PARENT_RATE,
     NB_PARENT_KEPT,
@@ -19,7 +19,7 @@ class Beehive:
         self.generat_first_gen()
         self.compute_av_distance()
 
-    def select_top_bees(self, select_top_beesion_rate=SELECTION_RATE):
+    def select_top_bees(self, select_top_beesion_rate=SELECTION_QUOTA):
         bee_classment = sorted(self.population, key=lambda Bee: Bee.get_distance())
         top = bee_classment[:select_top_beesion_rate]
         return top
@@ -111,7 +111,7 @@ class Beehive:
                 )
             else:
                 child_path = parent1.cross_bee(parent2)
-            child_pos = i + SELECTION_RATE
+            child_pos = i + SELECTION_QUOTA
 
             self.population.append(Bee(child_path, child_pos))
 
