@@ -1,5 +1,5 @@
 import random
-from config import MUTATION_FREQUENCY, MUTATION_RATE, NB_BEES, FLOWERS, SELECTION_RATE
+from config import MUTATION_FREQUENCY, MUTATION_RATE, NB_BEES, FLOWERS, SELECTION_RATE, NB_SEGMENT, PARENT_RATE, NB_PARENT_KEPT
 from bee import Bee
 
 
@@ -46,7 +46,7 @@ class Beehive:
 
             if random.random() < MUTATION_RATE:
                 bee.mutate(MUTATION_FREQUENCY)
-        self._generation += 1
+        # self._generation += 1
         self.compute_av_distance()
 
     def compute_av_distance(self):
@@ -66,16 +66,85 @@ class Beehive:
     #             self.population[j + i].change_path(path_children)
     #     self.compute_av_distance()
     #     self._generation += 
+
+    def increment(self, parent_path, pos, len_segment):
+        tmp = []
+
+        while pos < len (parent_path) :
+            tmp.append(parent_path[pos])
+            pos += 1
+
+        return tmp
+
+    def cross_method(self, parent_1, parent_2, nb_segment, parent_rate):
+        child_1_path = []
+
+        parent_1_path = parent_1.get_path()
+        parent_2_path = parent_2.get_path()
+
+        len_segment = len(parent_1.get_path()) // nb_segment
+
+        pos_1, pos_2 = 0, 0
+
+        while pos_1 <= len(parent_1_path) or pos_2 <= len(parent_2_path):
+
+            chance = random.random()
+            if chance <= parent_rate:
+
+                child_1_path.extend(self.increment(parent_1_path, pos_1, len_segment))
+                pos_1 += len_segment
+
+            if chance >= parent_rate:
+
+                child_1_path.extend(self.increment(parent_2_path, pos_2, len_segment))
+                pos_2 += len_segment
+
+        return list (set(child_1_path))
+
+    # def cross_1(self, top: list):
+    #     self.population = [top[i] for i in range(NB_PARENT_KEPT)]
         
+    #     for i in range(NB_BEES - NB_PARENT_KEPT):
+    #         parent1 = random.choice(top)
+    #         parent2 = random.choice(top)
 
-    def cross_bees(self, top):
-        self.population = []
+    #         child_path = self.cross_method(parent1, parent2, NB_SEGMENT, PARENT_RATE)
+    #         child_pos = i + SELECTION_RATE
 
-        for i in range (NB_BEES) :
+    #         self.population.append (Bee (child_path, child_pos))
+                    
+    #     self.compute_av_distance()
+    #     self._generation += 1
+
+    # def cross_2(self, top):
+    #     self.population = [top[i] for i in range(NB_PARENT_KEPT)]
+
+    #     for i in range (NB_BEES - NB_PARENT_KEPT) :
+    #         parent1 = random.choice(top)
+    #         parent2 = random.choice(top)
+
+    #         child_path = parent1.cross_bee(parent2)
+    #         child_pos = i + SELECTION_RATE
+
+    #         self.population.append(Bee(child_path, child_pos))
+
+    #     self.compute_av_distance()
+    #     self._generation += 1
+
+    def cross (self, top, test) :
+        self.population = [top[i] for i in range(NB_PARENT_KEPT)]
+
+        for i in range (NB_BEES - NB_PARENT_KEPT) :
             parent1 = random.choice(top)
             parent2 = random.choice(top)
-            children = parent1.cross_bee(parent2)
-            self.population.append(Bee(children, i))
+
+            if test == 1:
+                child_path = self.cross_method(parent1, parent2, NB_SEGMENT, PARENT_RATE)
+            else :
+                child_path = parent1.cross_bee(parent2)
+            child_pos = i + SELECTION_RATE
+
+            self.population.append(Bee(child_path, child_pos))
 
         self.compute_av_distance()
         self._generation += 1
