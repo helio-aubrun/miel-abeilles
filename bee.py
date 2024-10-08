@@ -41,8 +41,8 @@ class Bee:
                 tmp_path[a], tmp_path[b] = tmp_path[b], tmp_path[a]
 
             if (
-                 self.compute_distance(tmp_path) - self._distance_traveled
-                 <= MUTATION_MARGIN
+                self.compute_distance(tmp_path) - self._distance_traveled
+                <= MUTATION_MARGIN
             ):
                 test_beter_distance = True
 
