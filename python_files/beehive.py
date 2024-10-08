@@ -55,7 +55,6 @@ class Beehive:
 
             if random.random() < MUTATION_RATE:
                 bee.mutate(MUTATION_FREQUENCY)
-        # self._generation += 1
         self.compute_av_distance()
 
     def compute_av_distance(self):
@@ -98,14 +97,14 @@ class Beehive:
 
         return list(set(child_1_path))
 
-    def cross(self, top, test):
+    def cross(self, top, choice):
         self.population = [top[i] for i in range(NB_PARENT_KEPT)]
 
         for i in range(NB_BEES - NB_PARENT_KEPT):
             parent1 = random.choice(top)
             parent2 = random.choice(top)
 
-            if test == 1:
+            if choice == 1:
                 child_path = self.cross_method(
                     parent1, parent2, NB_SEGMENT, PARENT_RATE
                 )
